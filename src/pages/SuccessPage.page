@@ -1,0 +1,5 @@
+<apex:page sidebar="false" showHeader="false" controller="SuccessPageCon">
+    <apex:pageBlock title="Confirmation Page">
+    	<h6 style="text-align:center">Congratulations <apex:outputField value="{!c.Name}"/>. Your registration is successful </h6>
+    </apex:pageBlock>   
+</apex:page>

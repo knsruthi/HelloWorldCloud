@@ -1,0 +1,14 @@
+<apex:page standardController="Contact" extensions="AdminReportCon" showHeader="false" sidebar="false">
+    <apex:form >
+        <apex:pageBlock title="Report of the users registered">
+            <apex:pageBlockTable var="cl" value="{!contactList}">
+                <apex:column value="{!cl.FirstName}"/>
+                <apex:column value="{!cl.LastName}"/>
+                <apex:column value="{!cl.MailingCity}"/>
+                <apex:column value="{!cl.MailingState}"/>
+                <apex:column value="{!cl.UserName__c}"/>
+                <apex:column value="{!cl.RegisteredOn__c}"/>             
+            </apex:pageBlockTable>       
+        </apex:pageBlock>    
+    </apex:form>    
+</apex:page>

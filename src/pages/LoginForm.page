@@ -1,0 +1,49 @@
+<apex:page id="pg" standardController="contact" extensions="LoginForm" showHeader="false" sidebar="false" >
+    <script>
+		function test(){
+   			var p1 = document.getElementById('pg:fm:pb:pbs2:pwd').value;
+            var z = document.getElementById('pg:fm:pb:pbs1:zip').value;
+            if(p1 != document.getElementById('pg:fm:pb:pbs2:cPwd').value){
+                alert('Passwords are not matching. Please re confirm the password in Login Information Section');
+                return false;
+                }
+            if(document.getElementById('pg:fm:pb:pbs1:country').value != 'United States'){
+                alert('Please enter a valid address in United States');
+                return false;
+                }
+            if(/[^0-9]/.test( z )){
+                alert('Please enter a valid postal code. Only numerics are accepted');
+                return false;
+                }  
+    		saveInformation();
+    		return true;
+		}
+	</script>
+    <apex:form id="fm" >
+        <apex:pageBlock id="pb" title="Login Form">
+            <apex:pagemessages ></apex:pagemessages>
+            <apex:pageBlockButtons >
+                <apex:actionFunction id="AJAX1" name="saveInformation" action="{!saveInfo}"></apex:actionFunction>
+                <apex:commandButton value="Save" title="Save"  onclick="test();return false;"/>
+            	<apex:commandButton value="Cancel" title="Cancel" action="{!redirectInfo}"/>
+            </apex:pageBlockButtons>           
+            <apex:pageBlockSection id="pbs1" title="Personal Information" collapsible="false"> 
+            	<apex:inputField value="{!c.FirstName}"  id="fname"></apex:inputField>
+            	<apex:inputField value="{!c.LastName}" required="true"></apex:inputField>
+            	<apex:inputField value="{!c.Address1__c}" required="true"></apex:inputField>
+            	<apex:inputField value="{!c.Address2__c}"></apex:inputField>
+            	<apex:inputField value="{!c.MailingCity}" required="true"></apex:inputField>
+            	<apex:inputField value="{!c.MailingState}" required="true"></apex:inputField>
+            	<apex:inputField value="{!c.MailingPostalCode}" id="zip" required="true"></apex:inputField>
+            	<apex:inputField value="{!c.MailingCountry}" id="country" required="true"></apex:inputField>
+                <apex:inputField value="{!c.email}"></apex:inputField>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection id="pbs2" title="Login Information" columns="1" collapsible="false">           
+            	<apex:inputField value="{!c.UserName__c}" required="true"></apex:inputField>
+            	<apex:inputField value="{!c.Password__c}" id="pwd" required="true"></apex:inputField>
+                <apex:inputText label="Confirm Password" id="cPwd" required="true"></apex:inputText> 
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+    
+</apex:page>
